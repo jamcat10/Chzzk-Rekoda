@@ -451,17 +451,18 @@ async def record_stream(
                     if shutdown_event.is_set():
                         break
 
-                    current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+                    current_time = time.strftime("%Y-%m-%d_%H%M%S")
                     live_title = SPECIAL_CHARS_REMOVER.sub(
                         "", live_info.get("liveTitle", "").rstrip()
                     )
+                    live_category = live_info.get("liveCategory")                    
                     output_dir = Path(
                         channel.get("output_dir", "./recordings")
                     ).expanduser()
                     temp_output_file = shorten_filename(
-                        f"[{current_time.replace(':', '_')}] {channel_name} {live_title}.ts.part"
+                        f"{channel_name}_{current_time}_{live_title}_{live_category}.mp4"
                     )
-                    final_output_file = temp_output_file[:-5]  # Remove '.part'
+                    final_output_file = temp_output_file
                     temp_output_path = output_dir / temp_output_file
                     final_output_path = output_dir / final_output_file
 
