@@ -459,8 +459,9 @@ async def record_stream(
                     output_dir = Path(
                         channel.get("output_dir", "./recordings")
                     ).expanduser()
+                    suffix = os.getenv("FILENAME_SUFFIX", "")
                     temp_output_file = shorten_filename(
-                        f"{channel_name}_{current_time}_{live_title}_{live_category}.mp4"
+                        f"{channel_name}_{current_time}_{live_title}_{live_category}{suffix}.mp4"
                     )
                     final_output_file = temp_output_file
                     temp_output_path = output_dir / temp_output_file
