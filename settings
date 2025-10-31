@@ -1,5 +1,0 @@
-#!/bin/bash
-
-uv run settings.py
-
-exit 0
